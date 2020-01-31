@@ -1,17 +1,17 @@
 ## Questions
 
-**Explain the difference between relational databases and SQL.**
+**What is the purpose of using sessions?**
 
-SQL, or structured query language, is used to create, read, update, and delete inside of a relational database like Postgres.
+Sessions are a form of authentication and allows users to access protected endpoints.
 
-**Why do table need a primary key?**
+**What does bcrypt do to help us store passwords in a secure manner?**
 
-Tables need a primary key in order to make the rows accessible, especially in the case of foreign keys.
+Bcrypt hashes passwords multiple times so that we don't store plain passwords in our database.
 
-**What is the name given to a table column that references the primary key on another table?**
+**What does bcrypt do to slow down attackers??**
 
-Foreign key
+With bcrypt, you can set a number of 'rounds'. Bcrypt will salt and hash that number of times making it difficult and time-consuming to decrypt.
 
 **What do we need in order to have a many to many relationship between two tables?**
 
-An intermediary table
+The three parts of a JWT are the header, the payload, and the signature.
