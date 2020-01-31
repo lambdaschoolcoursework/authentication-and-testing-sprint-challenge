@@ -1,6 +1,6 @@
 const database = require('../database/dbConfig');
 
-const register = user => {
+const add = user => {
     return database('users').insert(user);
 };
 
@@ -9,6 +9,6 @@ const find = username => {
 };
 
 module.exports = {
-    register,
+    add,
     find
 };

@@ -1,7 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const middleware = require('./authenticate-middleware');
 const Users = require('./auth-model');
 
 const app = express.Router();
@@ -11,7 +10,7 @@ app.post('/register', (request, response) => {
     const hash = bcrypt.hashSync(request.body.password, 10);
     user.password = hash;
 
-    Users.register(user)
+    Users.add(user)
         .then(res => response.status(200).json({message: 'user created successfully'}))
         .catch(err => {
             response.status(500).json({message: 'error registering user'});
