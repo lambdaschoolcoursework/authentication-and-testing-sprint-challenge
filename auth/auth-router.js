@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const middleware = require('./authenticate-middleware');
 const Users = require('./auth-model');
@@ -6,15 +7,19 @@ const Users = require('./auth-model');
 const app = express.Router();
 
 app.post('/register', (request, response) => {
-	Users.register(request.body)
-		.then(res => response.status(200).json({message: 'successfully registered user'}))
-		.catch(err => {
-			response.status(500).json({message: 'error registering user'});
-			console.log(err);
-		});
+	let user = request.body;
+    const hash = bcrypt.hashSync(request.body.password, 10);
+    user.password = hash;
+
+    Users.register(user)
+        .then(res => response.status(200).json({message: 'user created successfully'}))
+        .catch(err => {
+            response.status(500).json({message: 'error registering user'});
+            console.log(err);
+        });
 });
 
-app.post('/login', middleware, (request, response) => {
+app.post('/login', (request, response) => {
 	const {username, password} = request.body;
 
 	Users.find({username})

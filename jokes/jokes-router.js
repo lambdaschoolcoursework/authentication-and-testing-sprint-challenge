@@ -1,19 +1,19 @@
-const router = require('express').Router();
+const express = require('express');
 const axios = require('axios');
 
-router.get('/', (req, res) => {
-  const requestOptions = {
-    headers: { accept: 'application/json' },
-  };
+const app = express.Router();
 
-  axios
-    .get('https://icanhazdadjoke.com/search', requestOptions)
-    .then(response => {
-      res.status(200).json(response.data.results);
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'Error Fetching Jokes', error: err });
-    });
+app.get('/', (request, response) => {
+	const requestOptions = {
+		headers: {accept: 'application/json'},
+	};
+
+	axios.get('https://icanhazdadjoke.com/search', requestOptions)
+		.then(res => response.status(200).json(res.data.results))
+		.catch(err => {
+			res.status(500).json({message: 'error fetching jokes'});
+			console.log(err);
+		});
 });
 
-module.exports = router;
+module.exports = app;
