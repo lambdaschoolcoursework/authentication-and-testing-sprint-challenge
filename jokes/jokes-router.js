@@ -1,6 +1,5 @@
-const axios = require('axios');
-
 const router = require('express').Router();
+const axios = require('axios');
 
 router.get('/', (req, res) => {
   const requestOptions = {
