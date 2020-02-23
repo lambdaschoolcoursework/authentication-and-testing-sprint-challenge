@@ -2,17 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const authenticate = require('../auth/authenticate-middleware.js');
 const authRouter = require('../auth/auth-router.js');
 const jokesRouter = require('../jokes/jokes-router.js');
+const authenticate = require('../auth/authenticate-middleware.js');
 
-const server = express();
+const app = express();
 
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
+app.use(express.json());
+app.use(cors());
+app.use(helmet());
 
-server.use('/api/auth', authRouter);
-server.use('/api/jokes', authenticate, jokesRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/jokes', authenticate, jokesRouter);
 
-module.exports = server;
+module.exports = app;
